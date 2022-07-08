@@ -3,6 +3,9 @@ import { css } from "@emotion/react";
 import chewbacca from "../assets/chewbacca.png";
 import vader from "../assets/Darth_vader.png";
 import yoda from "../assets/lego-yoda.png";
+import edBoom from "../assets/ed-boom.png";
+import liuKang from "../assets/liu-kang.png";
+import scorpions from "../assets/scorpions.png";
 
 const headerStyle = {
   self: css({
@@ -26,7 +29,7 @@ const headerStyle = {
       fontSize: "1.2rem",
       overflow: "hidden",
       img: css({
-        width: "60px",
+        height: "75px",
       }),
     }),
   }),
@@ -41,16 +44,16 @@ export const Header = () => {
       <h1>header</h1>
       <div css={headerStyle.characters}>
         <div>
-          <img src={chewbacca} alt="" />
+          <img src={edBoom} alt="" />
           <span>Chewbacca</span>
         </div>
         <div>
-          <img src={vader} alt="" />
+          <img src={liuKang} alt="" />
 
           <span>Darth Vader</span>
         </div>
         <div>
-          <img src={yoda} alt="" />
+          <img src={scorpions} alt="" />
           <span>Yoda</span>
         </div>
       </div>

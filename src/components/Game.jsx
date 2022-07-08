@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import legoImage from "../assets/LEGO-Star-Wars.jpg";
+import MortalKombat from "../assets/Mortal-Kombat.jpg";
+
 import { css } from "@emotion/react";
 
 const gameStyle = {
@@ -15,7 +17,7 @@ const gameStyle = {
 export const GameImage = () => {
   return (
     <div css={gameStyle.self}>
-      <img src={legoImage} alt="Lego Star Wars" css={gameStyle.image} />
+      <img src={MortalKombat} alt="Lego Star Wars" css={gameStyle.image} />
     </div>
   );
 };
