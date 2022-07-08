@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import bb8 from "../assets/bb-8.png";
+import chewbacca from "../assets/chewbacca.png";
 import vader from "../assets/Darth_vader.png";
-import luke from "../assets/luke.png";
+import yoda from "../assets/lego-yoda.png";
 
 const headerStyle = {
   self: css({
@@ -41,8 +41,8 @@ export const Header = () => {
       <h1>header</h1>
       <div css={headerStyle.characters}>
         <div>
-          <img src={bb8} alt="" />
-          <span>Bb 8</span>
+          <img src={chewbacca} alt="" />
+          <span>Chewbacca</span>
         </div>
         <div>
           <img src={vader} alt="" />
@@ -50,8 +50,8 @@ export const Header = () => {
           <span>Darth Vader</span>
         </div>
         <div>
-          <img src={luke} alt="" />
-          <span>Luke Skywalker</span>
+          <img src={yoda} alt="" />
+          <span>Yoda</span>
         </div>
       </div>
       <span css={headerStyle.time}>00.00.00</span>

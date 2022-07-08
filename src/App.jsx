@@ -1,4 +1,5 @@
 import { Header } from "./components/Header";
+import { GameImage } from "./components/Game";
 import { Global, css } from "@emotion/react";
 
 function App() {
@@ -11,10 +12,12 @@ function App() {
             margin: 0;
             box-sizing: border-box;
             font-family: "Work Sans", sans-serif;
+            background-color: #17181f;
           }
         `}
       />
       <Header />
+      <GameImage />
     </div>
   );
 }
