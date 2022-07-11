@@ -1,11 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import chewbacca from "../assets/chewbacca.png";
-import vader from "../assets/Darth_vader.png";
-import yoda from "../assets/lego-yoda.png";
-import edBoom from "../assets/ed-boom.png";
-import liuKang from "../assets/liu-kang.png";
-import scorpions from "../assets/scorpion.png";
 
 const headerStyle = {
   self: css({
@@ -39,7 +33,6 @@ const headerStyle = {
 };
 
 export const Header = ({ itemsList }) => {
-  console.log(itemsList);
   return (
     <header css={headerStyle.self}>
       <h1>header</h1>

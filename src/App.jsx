@@ -1,14 +1,15 @@
 import { Global, css } from "@emotion/react";
+import { useEffect, useState } from "react";
+import { itemsList } from "./services/dataItemsList";
+
 import { Header } from "./components/Header";
 import { GameImage } from "./components/Game";
 import { Modal } from "./components/ModalScenarios";
-import { itemsList } from "./services/dataItemsList";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
   const [levelSelected, setLevelSelected] = useState("");
-  const [levelInfo, setLevelInfo] = useState([]);
+  const [levelInfo, setLevelInfo] = useState({});
+  const [menuCoords, setMenuCoords] = useState({});
 
   useEffect(() => {
     const result = itemsList.filter((item) => item.id === levelSelected);
@@ -32,7 +33,11 @@ function App() {
       />
       <Modal itemsList={itemsList} setLevelSelected={setLevelSelected} />
       <Header itemsList={levelInfo && levelInfo.itemList} />
-      <GameImage itemList={levelInfo && levelInfo} />
+      <GameImage
+        itemList={levelInfo && levelInfo}
+        setMenuCoords={setMenuCoords}
+        menuCoords={menuCoords}
+      />
     </>
   );
 }
