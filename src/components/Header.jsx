@@ -5,7 +5,7 @@ import vader from "../assets/Darth_vader.png";
 import yoda from "../assets/lego-yoda.png";
 import edBoom from "../assets/ed-boom.png";
 import liuKang from "../assets/liu-kang.png";
-import scorpions from "../assets/scorpions.png";
+import scorpions from "../assets/scorpion.png";
 
 const headerStyle = {
   self: css({
@@ -38,24 +38,21 @@ const headerStyle = {
   }),
 };
 
-export const Header = () => {
+export const Header = ({ itemsList }) => {
+  console.log(itemsList);
   return (
     <header css={headerStyle.self}>
       <h1>header</h1>
       <div css={headerStyle.characters}>
-        <div>
-          <img src={edBoom} alt="" />
-          <span>Chewbacca</span>
-        </div>
-        <div>
-          <img src={liuKang} alt="" />
-
-          <span>Darth Vader</span>
-        </div>
-        <div>
-          <img src={scorpions} alt="" />
-          <span>Yoda</span>
-        </div>
+        {itemsList &&
+          itemsList.map((item) => {
+            return (
+              <div key={item.id}>
+                <img src={item.image} alt={item.name} />
+                <span>{item.name}</span>
+              </div>
+            );
+          })}
       </div>
       <span css={headerStyle.time}>00.00.00</span>
     </header>
