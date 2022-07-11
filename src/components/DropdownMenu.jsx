@@ -34,8 +34,7 @@ export const DropdownMenu = ({
   handleDropdownMenuClick,
   itemList,
 }) => {
-  const notFound = itemList.filter((item) => !item.found);
-  console.log(notFound);
+  const notFound = itemList ? itemList.filter((item) => !item.found) : "";
   return (
     <div
       css={css`
