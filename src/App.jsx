@@ -4,7 +4,7 @@ import { itemsList } from "./services/dataItemsList";
 
 import { Header } from "./components/Header";
 import { GameImage } from "./components/Game";
-import { Modal } from "./components/ModalScenarios";
+import { Modal } from "./components/Modal";
 
 function App() {
   const [levelSelected, setLevelSelected] = useState("");
@@ -13,7 +13,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [isGameOver, setIsGameOver] = useState(false);
   const [time, setTime] = useState({});
-  const [modalType, setModalType] = useState("start");
 
   useEffect(() => {
     if (levelSelected !== "") {
@@ -40,7 +39,7 @@ function App() {
     //set the time elapsed
     setTime({ ...time, end: Date.now() });
     setIsModalOpen(true);
-    setModalType("score");
+    setLevelInfo({});
   };
 
   return (
@@ -58,17 +57,16 @@ function App() {
           }
         `}
       />
-      {modalType === "start" ? (
-        <Modal
-          itemsList={itemsList}
-          setLevelSelected={setLevelSelected}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          modalType={modalType}
-        />
-      ) : (
-        ""
-      )}
+
+      <Modal
+        itemsList={itemsList}
+        setLevelSelected={setLevelSelected}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        isGameOver={isGameOver}
+        setIsGameOver={setIsGameOver}
+        time={time}
+      />
       <Header
         list={levelInfo && levelInfo.itemList}
         isGameOver={isGameOver}
