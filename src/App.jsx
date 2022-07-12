@@ -10,11 +10,38 @@ function App() {
   const [levelSelected, setLevelSelected] = useState("");
   const [levelInfo, setLevelInfo] = useState({});
   const [menuCoords, setMenuCoords] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [time, setTime] = useState({});
+  const [modalType, setModalType] = useState("start");
 
   useEffect(() => {
-    const result = itemsList.filter((item) => item.id === levelSelected);
-    setLevelInfo(...result);
+    if (levelSelected !== "") {
+      const result = itemsList.filter((item) => item.id === levelSelected);
+      setLevelInfo(...result);
+      //start recordind seconds
+      setTime({ end: 0, start: Date.now() });
+    }
   }, [levelSelected]);
+
+  useEffect(() => {
+    if (levelInfo.id) {
+      //verify if all items were found
+      const win = levelInfo.itemList.every((item) => item.found);
+      if (win) {
+        handleWin();
+      }
+    }
+  }, [levelInfo]);
+
+  const handleWin = () => {
+    console.log("YOU WIN");
+    setIsGameOver(true);
+    //set the time elapsed
+    setTime({ ...time, end: Date.now() });
+    setIsModalOpen(true);
+    setModalType("score");
+  };
 
   return (
     <>
@@ -31,12 +58,27 @@ function App() {
           }
         `}
       />
-      <Modal itemsList={itemsList} setLevelSelected={setLevelSelected} />
-      <Header itemsList={levelInfo && levelInfo.itemList} />
+      {modalType === "start" ? (
+        <Modal
+          itemsList={itemsList}
+          setLevelSelected={setLevelSelected}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          modalType={modalType}
+        />
+      ) : (
+        ""
+      )}
+      <Header
+        list={levelInfo && levelInfo.itemList}
+        isGameOver={isGameOver}
+        time={time}
+      />
       <GameImage
         itemList={levelInfo && levelInfo}
         setMenuCoords={setMenuCoords}
         menuCoords={menuCoords}
+        setLevelInfo={setLevelInfo}
       />
     </>
   );

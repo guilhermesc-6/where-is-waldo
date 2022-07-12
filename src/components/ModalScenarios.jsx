@@ -62,9 +62,12 @@ const modalStyle = {
   }),
 };
 
-export const Modal = ({ itemsList, setLevelSelected }) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
+export const Modal = ({
+  itemsList,
+  setLevelSelected,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
   const handleClickSelection = (e) => {
     setLevelSelected(e.target.parentElement.id);
     setIsModalOpen(!isModalOpen);

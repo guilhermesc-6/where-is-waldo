@@ -7,7 +7,7 @@ const headerStyle = {
     height: "80px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     padding: "0 5rem",
     backgroundColor: "#17181f",
     color: "#fff",
@@ -27,27 +27,28 @@ const headerStyle = {
       }),
     }),
   }),
-  time: css({
-    fontSize: "1.3rem",
-  }),
 };
 
-export const Header = ({ itemsList }) => {
+export const Header = ({ list, isGameOver, time }) => {
   return (
     <header css={headerStyle.self}>
       <h1>header</h1>
       <div css={headerStyle.characters}>
-        {itemsList &&
-          itemsList.map((item) => {
+        {list &&
+          list.map((item) => {
             return (
-              <div key={item.id}>
+              <div
+                key={item.id}
+                css={css`
+                  opacity: ${item.found ? "0.5" : "1"};
+                `}
+              >
                 <img src={item.image} alt={item.name} />
                 <span>{item.name}</span>
               </div>
             );
           })}
       </div>
-      <span css={headerStyle.time}>00.00.00</span>
     </header>
   );
 };

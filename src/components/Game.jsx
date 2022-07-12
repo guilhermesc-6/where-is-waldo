@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 
 import { getCoords } from "../services/firebase";
@@ -27,6 +27,21 @@ export const GameImage = ({
 }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 
+  const toggleFound = (itemid) => {
+    //return a new Object with the change in item.found
+    const updatedImage = {
+      ...itemList,
+      itemList: itemList.itemList.map((item) => {
+        if (item.id === itemid) {
+          return { ...item, found: true };
+        } else {
+          return item;
+        }
+      }),
+    };
+    setLevelInfo(updatedImage);
+  };
+
   const handleImageClick = (e) => {
     //get the location of click
     const { pageY, pageX } = e;
@@ -51,7 +66,7 @@ export const GameImage = ({
       if (x && y) {
         console.log("You found");
         Toastify({
-          text: `You found ${e.target.innerText}!`,
+          text: `You found ${e.target.innerText} !`,
           duration: 3000,
           gravity: "top",
           position: "center",
@@ -61,6 +76,8 @@ export const GameImage = ({
               "linear-gradient(90deg, rgba(66,106,90,1) 0%, rgba(31,107,39,1) 100%)",
           },
         }).showToast();
+
+        toggleFound(itemId);
       } else {
         console.log("keep looking");
         Toastify({
@@ -75,10 +92,9 @@ export const GameImage = ({
           },
         }).showToast();
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
+
   return (
     <div css={gameStyle.self}>
       {itemList && (
