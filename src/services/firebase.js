@@ -5,17 +5,16 @@ import {
   getDocs,
   addDoc,
   query,
-  orderBy,
   where,
 } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCaeqFDvxibnDq4XtqFDlPfV8oONoHUJOI",
-  authDomain: "where-is-waldo-716f1.firebaseapp.com",
-  projectId: "where-is-waldo-716f1",
-  storageBucket: "where-is-waldo-716f1.appspot.com",
-  messagingSenderId: "594344231051",
-  appId: "1:594344231051:web:11961d5b8ef70f1f77d48e",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase
