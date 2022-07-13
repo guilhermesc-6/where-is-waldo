@@ -33,3 +33,7 @@ To run this project, you will need to add the following environment variables to
 `VITE_MESSAGING_SENDER_ID`
 
 `VITE_APP_ID`
+
+## Attribution
+
+Images made by: [Gus Morais.](https://www.behance.net/gusmorais)
