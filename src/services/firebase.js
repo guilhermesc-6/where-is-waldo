@@ -6,6 +6,8 @@ import {
   addDoc,
   query,
   where,
+  limit,
+  orderBy,
 } from "firebase/firestore/lite";
 
 const firebaseConfig = {
@@ -44,11 +46,12 @@ async function setUsers(user, time, id) {
   });
 }
 
-async function getListUsers(id) {
+async function getListUsers() {
   const docs = [];
-  const q = query(collection(db, "users"), where("id", "==", id));
+  const q = query(collection(db, "users"), orderBy("time"));
   const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => docs.push(doc.data()));
+  //include the id
+  querySnapshot.forEach((doc) => docs.push({ id: doc.id, data: doc.data() }));
   return docs;
 }
 

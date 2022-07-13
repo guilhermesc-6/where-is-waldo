@@ -11,7 +11,7 @@ const headerStyle = {
     padding: "0 5rem",
     backgroundColor: "#17181f",
     color: "#fff",
-    span: css({ color: "#780808" }),
+    h1: css({ span: css({ color: "#780808" }) }),
   }),
   characters: css({
     display: "flex",
@@ -30,7 +30,7 @@ const headerStyle = {
   }),
 };
 
-export const Header = ({ list, isGameOver, time }) => {
+export const Header = ({ list }) => {
   return (
     <header css={headerStyle.self}>
       <h1>

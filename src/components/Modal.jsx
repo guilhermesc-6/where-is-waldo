@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+
 import { css } from "@emotion/react";
-import { useState } from "react";
-import { setUsers } from "../services/firebase";
+import { useEffect, useState } from "react";
+import { getListUsers, setUsers } from "../services/firebase";
 
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
@@ -67,8 +68,8 @@ const modalStyle = {
   }),
   score: css({
     backgroundColor: "#fffffa",
-    width: "450px",
-    height: "300px",
+    minWidth: "450px",
+    minHeight: "300px",
     borderRadius: "10px",
     display: "flex",
     flexDirection: "column",
@@ -120,6 +121,20 @@ const modalStyle = {
       }),
     }),
   }),
+  board: css({
+    display: "flex",
+    alignItems: "center",
+    gap: "50px",
+    padding: "2rem .5rem",
+    div: css({
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "10px",
+      h1: css({ fontSize: "1.5rem" }),
+      ol: css({ listStyleType: "upper-roman" }),
+    }),
+  }),
 };
 
 export const Modal = ({
@@ -134,6 +149,14 @@ export const Modal = ({
   levelInfo,
 }) => {
   const [text, setText] = useState("");
+  const [showScore, setShowScore] = useState(false);
+  const [scoreBoard, setScoreBoard] = useState([]);
+
+  useEffect(() => {
+    if (showScore) {
+      getListUsers("").then((res) => setScoreBoard(res));
+    }
+  }, [showScore]);
 
   const handleClickSelection = (e) => {
     setLevelSelected(e.target.parentElement.id);
@@ -142,6 +165,7 @@ export const Modal = ({
   //display the selection scenarios
   const handlePlayAgain = () => {
     setIsGameOver(false);
+    setShowScore(false);
     setLevelInfo({});
   };
   //register the player and the time
@@ -208,7 +232,48 @@ export const Modal = ({
             <a href="#" onClick={handlePlayAgain}>
               play again
             </a>
-            <a href="">got to leaderBoard</a>
+            <a
+              href="#"
+              onClick={() => {
+                setShowScore(!showScore);
+              }}
+            >
+              Check leaderBoard
+            </a>
+            {showScore ? (
+              <div css={modalStyle.board}>
+                <div>
+                  <h1>Mortal Kombat</h1>
+                  <ol>
+                    {scoreBoard.map((item) => {
+                      if (item.data.id === "mortal-kombat") {
+                        return (
+                          <li key={item.id}>
+                            {item.data.name} - {item.data.time} s
+                          </li>
+                        );
+                      }
+                    })}
+                  </ol>
+                </div>
+                <div>
+                  <h1>Lego Star Wars</h1>
+                  <ol>
+                    {scoreBoard.map((item) => {
+                      if (item.data.id === "lego-star-wars") {
+                        return (
+                          <li key={item.id}>
+                            {item.data.name} - {item.data.time} s
+                          </li>
+                        );
+                      }
+                    })}
+                  </ol>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       )}
