@@ -1,6 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { useState } from "react";
+import { setUsers } from "../services/firebase";
+
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 const modalStyle = {
   self: css({
@@ -12,6 +16,7 @@ const modalStyle = {
     alignItems: "center",
     justifyContent: "center",
     gap: "50px",
+    zIndex: "10",
   }),
   card: css({
     width: "auto",
@@ -125,6 +130,8 @@ export const Modal = ({
   isGameOver,
   setIsGameOver,
   time,
+  setLevelInfo,
+  levelInfo,
 }) => {
   const [text, setText] = useState("");
 
@@ -135,10 +142,24 @@ export const Modal = ({
   //display the selection scenarios
   const handlePlayAgain = () => {
     setIsGameOver(false);
+    setLevelInfo({});
   };
   //register the player and the time
   const handleSubmitText = () => {
-    console.log(text);
+    const timeSeconds = (time.end - time.start) / 1000;
+    setUsers(text, timeSeconds, levelInfo.id);
+    Toastify({
+      text: `Saved sucessfully! 👍`,
+      duration: 4000,
+      gravity: "top",
+      position: "center",
+      style: {
+        background: "rgb(66,106,90)",
+        background:
+          "linear-gradient(90deg, rgba(66,106,90,1) 0%, rgba(31,107,39,1) 100%)",
+      },
+    }).showToast();
+    setText("");
   };
 
   return (
@@ -184,7 +205,7 @@ export const Modal = ({
             </button>
           </div>
           <div css={modalStyle.scoreBtn}>
-            <a href="" onClick={handlePlayAgain}>
+            <a href="#" onClick={handlePlayAgain}>
               play again
             </a>
             <a href="">got to leaderBoard</a>

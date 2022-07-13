@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  orderBy,
+  where,
+} from "firebase/firestore/lite";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCaeqFDvxibnDq4XtqFDlPfV8oONoHUJOI",
@@ -29,4 +37,20 @@ async function getCoords(imageId, itemId) {
   return docs;
 }
 
-export { getCoords };
+async function setUsers(user, time, id) {
+  const docRef = await addDoc(collection(db, "users"), {
+    name: user,
+    time,
+    id,
+  });
+}
+
+async function getListUsers(id) {
+  const docs = [];
+  const q = query(collection(db, "users"), where("id", "==", id));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => docs.push(doc.data()));
+  return docs;
+}
+
+export { getCoords, setUsers, getListUsers };

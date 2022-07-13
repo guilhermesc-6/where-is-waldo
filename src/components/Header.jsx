@@ -11,6 +11,7 @@ const headerStyle = {
     padding: "0 5rem",
     backgroundColor: "#17181f",
     color: "#fff",
+    span: css({ color: "#780808" }),
   }),
   characters: css({
     display: "flex",
@@ -32,7 +33,9 @@ const headerStyle = {
 export const Header = ({ list, isGameOver, time }) => {
   return (
     <header css={headerStyle.self}>
-      <h1>header</h1>
+      <h1>
+        Where i <span>am ?</span>
+      </h1>
       <div css={headerStyle.characters}>
         {list &&
           list.map((item) => {

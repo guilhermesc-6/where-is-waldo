@@ -39,7 +39,7 @@ function App() {
     //set the time elapsed
     setTime({ ...time, end: Date.now() });
     setIsModalOpen(true);
-    setLevelInfo({});
+    scrollTo(0, 0);
   };
 
   return (
@@ -66,6 +66,8 @@ function App() {
         isGameOver={isGameOver}
         setIsGameOver={setIsGameOver}
         time={time}
+        setLevelInfo={setLevelInfo}
+        levelInfo={levelInfo}
       />
       <Header
         list={levelInfo && levelInfo.itemList}
