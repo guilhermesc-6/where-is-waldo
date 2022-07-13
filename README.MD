@@ -2,13 +2,25 @@
 
 A project for The Odin Project curriculum.
 
-## Stack
+## Screenshots
 
-**Front-end:** React, Emotion, Toastify-js
+![App Screenshot](https://i.imgur.com/9aC93pd.png)
 
-**Back-end:** Firebase
+## Features
 
-## Enviromente Variables
+- Choose a scenario to play.
+- Save your name and time.
+- See the score board.
+
+## Tech Stack
+
+**Client:** React, Emotion, Toastify-js
+
+**Server:** Firebase
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
 
 `VITE_API_KEY`
 
