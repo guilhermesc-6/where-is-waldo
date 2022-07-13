@@ -15,7 +15,7 @@ const gameStyle = {
   }),
   image: css({
     width: "100%",
-    cursor: "crosshair",
+    cursor: "url(../../src/assets/target.png) 15 15,crosshair",
   }),
 };
 
